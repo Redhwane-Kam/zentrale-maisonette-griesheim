@@ -1,0 +1,96 @@
+.page {
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: #1a1a1a;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.main-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: #333;
+  font-size: 0.95rem;
+}
+
+.hero {
+  padding: 80px 32px;
+  text-align: center;
+  background: #f7f5f2;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 28px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 12px 28px;
+  background: #1a1a1a;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+.amenities {
+  padding: 60px 32px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.amenities ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.amenities li {
+  padding: 10px 16px;
+  background: #f0f0f0;
+  border-radius: 8px;
+}
+
+.site-footer {
+  padding: 24px 32px;
+  border-top: 1px solid #eee;
+  text-align: center;
+  color: #777;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 600px) {
+  .main-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+  .amenities ul {
+    grid-template-columns: 1fr;
+  }
+}
