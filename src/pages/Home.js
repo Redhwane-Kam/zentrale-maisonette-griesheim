@@ -1,6 +1,8 @@
 import React from "react";
 import { useLanguage } from "../i18n/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
+import BookingForm from "../components/BookingForm";
+import AvailabilityCalendar from "../components/AvailabilityCalendar";
 import "./Home.css";
 
 export default function Home() {
@@ -34,6 +36,11 @@ export default function Home() {
           <li>{t.amenities.washer}</li>
           <li>{t.amenities.heating}</li>
         </ul>
+      </section>
+
+      <section id="booking" className="booking-section">
+        <AvailabilityCalendar />
+        <BookingForm />
       </section>
 
       <footer className="site-footer">

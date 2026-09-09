@@ -24,9 +24,16 @@ const de = {
     checkin: "Anreise",
     checkout: "Abreise",
     guests: "Gäste",
-    submit: "Verfügbarkeit prüfen",
+    submit: "Buchung anfragen",
     unavailable: "Diese Daten sind nicht verfügbar",
-    loading: "Wird geprüft..."
+    loading: "Wird geprüft...",
+    pendingAlert: "⚠️ Wichtig: Ihre Buchung ist zunächst ausstehend. Ihr Aufenthalt gilt erst nach unserer Bestätigung als garantiert.",
+    success: "Ihre Anfrage wurde gesendet! Sie erhalten in Kürze eine Bestätigung.",
+    error: "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    nameLabel: "Vollständiger Name",
+    emailLabel: "E-Mail",
+    phoneLabel: "Telefon",
+    guestsLabel: "Anzahl der Gäste"
   },
   footer: {
     contact: "Kontakt",

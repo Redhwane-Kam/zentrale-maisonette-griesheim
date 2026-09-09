@@ -24,9 +24,16 @@ const en = {
     checkin: "Check-in",
     checkout: "Check-out",
     guests: "Guests",
-    submit: "Check availability",
+    submit: "Request booking",
     unavailable: "These dates are not available",
-    loading: "Checking..."
+    loading: "Checking...",
+    pendingAlert: "⚠️ Important: your booking will be pending until confirmed. Please don't consider your stay guaranteed until you receive our confirmation.",
+    success: "Your request has been sent! You will receive a confirmation shortly.",
+    error: "An error occurred. Please try again.",
+    nameLabel: "Full name",
+    emailLabel: "Email",
+    phoneLabel: "Phone",
+    guestsLabel: "Number of guests"
   },
   footer: {
     contact: "Contact",

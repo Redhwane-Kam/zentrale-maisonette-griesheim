@@ -24,9 +24,16 @@ const fr = {
     checkin: "Arrivée",
     checkout: "Départ",
     guests: "Voyageurs",
-    submit: "Vérifier la disponibilité",
+    submit: "Demander la réservation",
     unavailable: "Ces dates ne sont pas disponibles",
-    loading: "Vérification en cours..."
+    loading: "Vérification en cours...",
+    pendingAlert: "⚠️ Important : votre réservation sera en attente jusqu'à confirmation. Merci de ne considérer votre séjour comme garanti qu'après réception de notre confirmation.",
+    success: "Votre demande a bien été envoyée ! Vous recevrez une confirmation sous peu.",
+    error: "Une erreur est survenue. Merci de réessayer.",
+    nameLabel: "Nom complet",
+    emailLabel: "Email",
+    phoneLabel: "Téléphone",
+    guestsLabel: "Nombre de voyageurs"
   },
   footer: {
     contact: "Contact",
