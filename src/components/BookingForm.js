@@ -109,6 +109,10 @@ export default function BookingForm() {
     <form className="booking-form" onSubmit={handleSubmit}>
       <h2>{t.booking.title}</h2>
 
+      <div className="booking-base-price">
+        {PRIX_PAR_NUIT}€ / {t.booking.perNight}
+      </div>
+
       <div className="booking-alert">
         {t.booking.pendingAlert}
       </div>

@@ -102,6 +102,7 @@ const de = {
     checkout: "Abreise",
     guests: "Gäste",
     submit: "Buchung anfragen",
+    perNight: "Nacht",
     unavailable: "Diese Daten sind nicht verfügbar",
     loading: "Wird geprüft...",
     pendingAlert: "⚠️ Wichtig: Ihre Buchung ist zunächst ausstehend. Ihr Aufenthalt gilt erst nach unserer Bestätigung als garantiert.",

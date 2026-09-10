@@ -12,6 +12,13 @@
   margin-bottom: 4px;
 }
 
+.booking-base-price {
+  text-align: center;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
 .booking-alert {
   background: #fff4e5;
   border: 1px solid #f0b429;

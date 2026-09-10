@@ -102,6 +102,7 @@ const fr = {
     checkout: "Départ",
     guests: "Voyageurs",
     submit: "Demander la réservation",
+    perNight: "nuit",
     unavailable: "Ces dates ne sont pas disponibles",
     loading: "Vérification en cours...",
     pendingAlert: "⚠️ Important : votre réservation sera en attente jusqu'à confirmation. Merci de ne considérer votre séjour comme garanti qu'après réception de notre confirmation.",

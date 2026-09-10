@@ -102,6 +102,7 @@ const en = {
     checkout: "Check-out",
     guests: "Guests",
     submit: "Request booking",
+    perNight: "night",
     unavailable: "These dates are not available",
     loading: "Checking...",
     pendingAlert: "⚠️ Important: your booking will be pending until confirmed. Please don't consider your stay guaranteed until you receive our confirmation.",
