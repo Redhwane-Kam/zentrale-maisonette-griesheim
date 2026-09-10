@@ -3,6 +3,8 @@ import { useLanguage } from "../i18n/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import BookingForm from "../components/BookingForm";
 import AvailabilityCalendar from "../components/AvailabilityCalendar";
+import AmenitiesList from "../components/AmenitiesList";
+import CancellationPolicy from "../components/CancellationPolicy";
 import "./Home.css";
 
 export default function Home() {
@@ -29,18 +31,13 @@ export default function Home() {
 
       <section id="amenities" className="amenities">
         <h2>{t.amenities.title}</h2>
-        <ul>
-          <li>{t.amenities.wifi}</li>
-          <li>{t.amenities.kitchen}</li>
-          <li>{t.amenities.parking}</li>
-          <li>{t.amenities.washer}</li>
-          <li>{t.amenities.heating}</li>
-        </ul>
+        <AmenitiesList />
       </section>
 
       <section id="booking" className="booking-section">
         <AvailabilityCalendar />
         <BookingForm />
+        <CancellationPolicy />
       </section>
 
       <footer className="site-footer">

@@ -1,0 +1,41 @@
+.amenities-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.amenities-category h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+  color: #1a1a1a;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 6px;
+}
+
+.amenities-category ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.amenities-category li {
+  font-size: 0.88rem;
+  color: #444;
+  line-height: 1.4;
+}
+
+.amenities-category li::before {
+  content: "✓ ";
+  color: #34a853;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .amenities-list {
+    grid-template-columns: 1fr;
+  }
+}

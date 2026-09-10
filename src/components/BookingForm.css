@@ -39,11 +39,23 @@ label {
   color: #333;
 }
 
-input {
+input, textarea {
   padding: 10px 12px;
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
+  font-family: inherit;
+}
+
+.booking-checkbox {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+
+.booking-checkbox input {
+  width: auto;
 }
 
 button {
@@ -61,6 +73,14 @@ button {
 button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.booking-price {
+  text-align: center;
+  font-size: 1rem;
+  padding: 8px;
+  background: #f7f5f2;
+  border-radius: 6px;
 }
 
 .booking-message {

@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { useLanguage } from "../i18n/LanguageContext";
+import {
+  calculerNombreNuits,
+  calculerPrixTotal,
+  estLongSejour,
+  PRIX_PAR_NUIT
+} from "../lib/pricing";
 import "./BookingForm.css";
 
 export default function BookingForm() {
@@ -12,8 +18,17 @@ export default function BookingForm() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [guests, setGuests] = useState(1);
+  const [motivation, setMotivation] = useState("");
+  const [tarifNonRemboursable, setTarifNonRemboursable] = useState(false);
 
   const [state, setState] = useState("idle"); // idle | loading | unavailable | success | error
+
+  const nombreNuits = calculerNombreNuits(checkin, checkout);
+  const longSejour = estLongSejour(nombreNuits);
+  const montantTotal = calculerPrixTotal({
+    nombreNuits,
+    tarifNonRemboursable: tarifNonRemboursable && !longSejour
+  });
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -36,20 +51,46 @@ export default function BookingForm() {
       }
 
       // Crée la réservation en statut "en_attente"
-      const { error: insertError } = await supabase.from("reservations").insert({
-        date_arrivee: checkin,
-        date_depart: checkout,
-        nom_voyageur: name,
-        email_voyageur: email,
-        telephone_voyageur: phone,
-        nombre_voyageurs: Number(guests),
-        status: "en_attente",
-        source: "site"
-      });
+      const { data: newReservation, error: insertError } = await supabase
+        .from("reservations")
+        .insert({
+          date_arrivee: checkin,
+          date_depart: checkout,
+          nom_voyageur: name,
+          email_voyageur: email,
+          telephone_voyageur: phone,
+          nombre_voyageurs: Number(guests),
+          status: "en_attente",
+          source: "site",
+          prix_total: montantTotal,
+          message_voyageur: motivation,
+          tarif_non_remboursable: tarifNonRemboursable && !longSejour
+        })
+        .select()
+        .single();
 
       if (insertError) throw insertError;
 
-      setState("success");
+      // Redirige vers le paiement Stripe
+      const checkoutResponse = await fetch("/api/create-checkout-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reservationId: newReservation.id,
+          montantEuros: montantTotal,
+          emailVoyageur: email,
+          nomLogement: "Zentrale Maisonette Griesheim"
+        })
+      });
+
+      const checkoutData = await checkoutResponse.json();
+
+      if (checkoutData.url) {
+        window.location.href = checkoutData.url;
+        return;
+      }
+
+      throw new Error("Impossible de créer le paiement");
     } catch (err) {
       console.error(err);
       setState("error");
@@ -68,7 +109,6 @@ export default function BookingForm() {
     <form className="booking-form" onSubmit={handleSubmit}>
       <h2>{t.booking.title}</h2>
 
-      {/* Alerte toujours visible, avant l'envoi */}
       <div className="booking-alert">
         {t.booking.pendingAlert}
       </div>
@@ -119,6 +159,37 @@ export default function BookingForm() {
           required
         />
       </label>
+
+      <label>
+        {t.motivation.label}
+        <textarea
+          value={motivation}
+          onChange={(e) => setMotivation(e.target.value)}
+          placeholder={t.motivation.placeholder}
+          rows={3}
+        />
+      </label>
+
+      {/* Option tarif non-remboursable : uniquement pour les séjours courts */}
+      {nombreNuits > 0 && !longSejour && (
+        <label className="booking-checkbox">
+          <input
+            type="checkbox"
+            checked={tarifNonRemboursable}
+            onChange={(e) => setTarifNonRemboursable(e.target.checked)}
+          />
+          {t.cancellation.nonRefundableOption}
+        </label>
+      )}
+
+      {nombreNuits > 0 && (
+        <div className="booking-price">
+          {nombreNuits} × {PRIX_PAR_NUIT}€
+          {tarifNonRemboursable && !longSejour ? " (−10%)" : ""}
+          {" = "}
+          <strong>{montantTotal}€</strong>
+        </div>
+      )}
 
       {state === "unavailable" && (
         <div className="booking-message booking-error">{t.booking.unavailable}</div>
