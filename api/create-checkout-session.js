@@ -59,7 +59,7 @@ export default async function handler(req, res) {
   try {
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
-      payment_method_types: ["card", "sepa_debit", "paypal", "giropay", "klarna"],
+      payment_method_types: ["card", "sepa_debit", "paypal"],
       customer_email: emailVoyageur,
       line_items: [
         {
