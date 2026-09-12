@@ -93,7 +93,7 @@ const fr = {
     nonRefundableOption: "Choisir le tarif non remboursable (−10 %)"
   },
   motivation: {
-    label: "Pourquoi ce séjour ? (facultatif, nous aide à mieux vous accueillir)",
+    label: "Pourquoi ce séjour ?",
     placeholder: "Ex : voyage professionnel, vacances en famille, découverte de la région..."
   },
   booking: {

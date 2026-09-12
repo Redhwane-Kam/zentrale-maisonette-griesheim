@@ -171,6 +171,7 @@ export default function BookingForm() {
           onChange={(e) => setMotivation(e.target.value)}
           placeholder={t.motivation.placeholder}
           rows={3}
+          required
         />
       </label>
 

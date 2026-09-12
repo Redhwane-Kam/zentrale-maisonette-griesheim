@@ -1,0 +1,154 @@
+.admin-dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.admin-header h1 {
+  font-size: 1.3rem;
+}
+
+.admin-logout-btn {
+  padding: 8px 16px;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.admin-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+}
+
+.admin-filter-btn {
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  background: white;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.admin-filter-btn.active {
+  background: #1a1a1a;
+  color: white;
+  border-color: #1a1a1a;
+}
+
+.admin-loading, .admin-empty {
+  text-align: center;
+  color: #999;
+  padding: 40px 0;
+}
+
+.admin-reservations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.admin-reservation-card {
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 16px;
+  background: white;
+}
+
+.admin-reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.status-pending { background: #fff4e5; color: #7a4a00; }
+.status-confirmed { background: #e6f7ed; color: #1e6b3a; }
+.status-cancelled { background: #fdecea; color: #a52a1f; }
+.status-blocked { background: #eee; color: #555; }
+
+.admin-reservation-dates {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.admin-reservation-body p {
+  font-size: 0.88rem;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.admin-contact {
+  color: #777 !important;
+}
+
+.admin-price {
+  font-weight: 600;
+}
+
+.admin-motivation {
+  font-style: italic;
+  color: #555 !important;
+  background: #f7f5f2;
+  padding: 8px 10px;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.admin-reservation-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.admin-btn-confirm {
+  padding: 8px 16px;
+  background: #34a853;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.admin-btn-cancel {
+  padding: 8px 16px;
+  background: #e53935;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.admin-remise-select {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  margin-left: auto;
+}

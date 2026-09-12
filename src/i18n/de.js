@@ -93,7 +93,7 @@ const de = {
     nonRefundableOption: "Nicht erstattungsfähigen Tarif wählen (−10 %)"
   },
   motivation: {
-    label: "Warum dieser Aufenthalt? (optional, hilft uns bei der Vorbereitung)",
+    label: "Warum dieser Aufenthalt?",
     placeholder: "Z. B.: Geschäftsreise, Familienurlaub, Erkundung der Region..."
   },
   booking: {

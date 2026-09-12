@@ -93,7 +93,7 @@ const en = {
     nonRefundableOption: "Choose non-refundable rate (−10%)"
   },
   motivation: {
-    label: "Why this stay? (optional, helps us welcome you better)",
+    label: "Why this stay?",
     placeholder: "E.g.: business trip, family vacation, exploring the region..."
   },
   booking: {
