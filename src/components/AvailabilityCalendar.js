@@ -15,8 +15,25 @@ const DAY_NAMES = {
   en: ["M","T","W","T","F","S","S"]
 };
 
-function toDateKey(date) {
-  return date.toISOString().split("T")[0];
+// Construit une clé "YYYY-MM-DD" à partir d'année/mois/jour locaux,
+// sans jamais passer par Date.toISOString() (qui convertit en UTC
+// et peut décaler la date d'un jour selon le fuseau horaire du visiteur).
+function makeDateKey(year, month, day) {
+  const mm = String(month + 1).padStart(2, "0");
+  const dd = String(day).padStart(2, "0");
+  return `${year}-${mm}-${dd}`;
+}
+
+// Ajoute des jours à une clé "YYYY-MM-DD" en restant en arithmétique
+// de date pure (UTC neutre), pour éviter tout glissement de fuseau.
+function addDaysToKey(dateKey, days) {
+  const [y, m, d] = dateKey.split("-").map(Number);
+  const utcDate = new Date(Date.UTC(y, m - 1, d));
+  utcDate.setUTCDate(utcDate.getUTCDate() + days);
+  const yy = utcDate.getUTCFullYear();
+  const mm = String(utcDate.getUTCMonth() + 1).padStart(2, "0");
+  const dd = String(utcDate.getUTCDate()).padStart(2, "0");
+  return `${yy}-${mm}-${dd}`;
 }
 
 function getDaysInMonth(year, month) {
@@ -58,13 +75,16 @@ export default function AvailabilityCalendar() {
         return;
       }
 
+      // Convention choisie : le jour d'ARRIVÉE est marqué occupé,
+      // le jour de DÉPART reste disponible (le logement se libère ce jour-là).
+      // date_arrivee et date_depart arrivent de Supabase au format "YYYY-MM-DD".
       const dates = new Set();
       (data || []).forEach((res) => {
-        let cursor = new Date(res.date_arrivee);
-        const end = new Date(res.date_depart);
+        let cursor = res.date_arrivee; // ex: "2026-09-19"
+        const end = res.date_depart;   // ex: "2026-09-20"
         while (cursor < end) {
-          dates.add(toDateKey(cursor));
-          cursor.setDate(cursor.getDate() + 1);
+          dates.add(cursor);
+          cursor = addDaysToKey(cursor, 1);
         }
       });
 
@@ -104,7 +124,7 @@ export default function AvailabilityCalendar() {
   const monthLabel = `${MONTH_NAMES[lang][viewMonth]} ${viewYear}`;
   const dayLabels = DAY_NAMES[lang];
 
-  const todayKey = toDateKey(today);
+  const todayKey = makeDateKey(today.getFullYear(), today.getMonth(), today.getDate());
 
   return (
     <div className="calendar">
@@ -124,8 +144,7 @@ export default function AvailabilityCalendar() {
         {cells.map((day, i) => {
           if (day === null) return <div key={i} className="calendar-cell empty" />;
 
-          const cellDate = new Date(viewYear, viewMonth, day);
-          const key = toDateKey(cellDate);
+          const key = makeDateKey(viewYear, viewMonth, day);
           const isPast = key < todayKey;
           const isBlocked = blockedDates.has(key);
 
