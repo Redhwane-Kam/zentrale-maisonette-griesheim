@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "../lib/supabaseClient";
+import ClientHistory from "./ClientHistory";
 import "./AdminDashboard.css";
 
 const STATUS_LABELS = {
@@ -57,6 +58,46 @@ export default function AdminDashboard({ session, onLogout }) {
       return;
     }
     fetchReservations();
+  }
+
+  async function generateInvoice(reservation) {
+    const numeroFacture = window.prompt(
+      "Numéro de facture (ex: RE-2026-0001) :",
+      ""
+    );
+    if (!numeroFacture) return; // annulé par la fille
+
+    const { data: sessionData } = await supabase.auth.getSession();
+    const accessToken = sessionData?.session?.access_token;
+
+    try {
+      const response = await fetch("/api/generate-invoice", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          reservationId: reservation.id,
+          numeroFacture,
+          accessToken
+        })
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error || "Erreur inconnue");
+      }
+
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `Rechnung-${numeroFacture}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err) {
+      alert("Erreur lors de la génération de la facture : " + err.message);
+    }
   }
 
   const filteredReservations = reservations.filter((r) => {
@@ -140,7 +181,15 @@ export default function AdminDashboard({ session, onLogout }) {
                 <option value={5}>Remise 5%</option>
                 <option value={10}>Remise 10%</option>
               </select>
+
+              {r.status === "confirmee" && (
+                <button className="admin-btn-invoice" onClick={() => generateInvoice(r)}>
+                  📄 Facture
+                </button>
+              )}
             </div>
+
+            <ClientHistory reservation={r} />
           </div>
         ))}
       </div>

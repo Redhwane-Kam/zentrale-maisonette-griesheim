@@ -1,0 +1,174 @@
+.client-history {
+  margin-top: 14px;
+  border-top: 1px solid #eee;
+  padding-top: 12px;
+}
+
+.client-history-toggle {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  color: #444;
+}
+
+.client-history-toggle.has-warning {
+  border-color: #e53935;
+  color: #a52a1f;
+  font-weight: 600;
+  background: #fdecea;
+}
+
+.client-history-panel {
+  margin-top: 10px;
+  padding: 12px;
+  background: #fafafa;
+  border-radius: 8px;
+}
+
+.client-history-loading, .client-history-empty {
+  font-size: 0.82rem;
+  color: #888;
+  margin: 0;
+}
+
+.client-history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.client-history-item {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border-left: 3px solid #ccc;
+  background: white;
+}
+
+.client-history-item.rating-excellent { border-left-color: #34a853; }
+.client-history-item.rating-correct { border-left-color: #9aa0a6; }
+.client-history-item.rating-problematic { border-left-color: #e53935; background: #fdecea; }
+
+.client-history-item-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.client-history-rating {
+  font-weight: 600;
+}
+
+.client-history-damage {
+  color: #a52a1f;
+  font-weight: 600;
+  font-size: 0.75rem;
+  background: #fdecea;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.client-history-date {
+  margin-left: auto;
+  color: #999;
+  font-size: 0.75rem;
+}
+
+.client-history-comment {
+  margin: 6px 0 0 0;
+  font-size: 0.82rem;
+  color: #444;
+  font-style: italic;
+}
+
+.client-history-add-btn {
+  background: none;
+  border: 1px dashed #bbb;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  color: #555;
+  cursor: pointer;
+  width: 100%;
+}
+
+.client-history-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.client-history-rating-choices {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.client-history-radio {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  cursor: pointer;
+}
+
+.client-history-radio.selected {
+  background: #1a1a1a;
+  color: white;
+  border-color: #1a1a1a;
+}
+
+.client-history-radio input {
+  display: none;
+}
+
+.client-history-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+}
+
+.client-history-form textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 0.82rem;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.client-history-form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.client-history-form-actions button[type="submit"] {
+  background: #1a1a1a;
+  color: white;
+  border: none;
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.client-history-form-actions button[type="button"] {
+  background: none;
+  border: 1px solid #ccc;
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
