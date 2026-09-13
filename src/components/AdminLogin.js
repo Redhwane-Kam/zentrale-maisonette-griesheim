@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import "./AdminLogin.css";
 
-// Connexion en deux temps :
+// Connexion en deux temps (v1 - test, en attendant un SMTP personnalisé
+// pour passer à un vrai code à 6 chiffres saisi manuellement) :
 // 1) email + mot de passe (1er facteur, via Supabase Auth)
-// 2) code à 6 chiffres envoyé par email (2e facteur, via signInWithOtp)
-// La session n'est considérée valide qu'après validation des deux étapes.
+// 2) lien de connexion envoyé par email (2e facteur) : cliquer dessus
+//    ramène l'utilisateur sur /admin avec une session déjà active.
 export default function AdminLogin({ onLoginSuccess }) {
-  const [step, setStep] = useState("password"); // "password" | "otp"
+  const [step, setStep] = useState("password"); // "password" | "waiting-link"
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [otpCode, setOtpCode] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -32,82 +32,46 @@ export default function AdminLogin({ onLoginSuccess }) {
     }
 
     // Le mot de passe est correct : on se déconnecte immédiatement de cette
-    // session "1er facteur" et on déclenche l'envoi du code par email,
-    // pour n'ouvrir une vraie session qu'après validation du code (2e facteur).
+    // session "1er facteur" et on envoie le lien de connexion (2e facteur).
+    // Tant que ce lien n'est pas cliqué, aucune vraie session n'est ouverte.
     await supabase.auth.signOut();
 
     const { error: otpError } = await supabase.auth.signInWithOtp({
       email,
-      options: { shouldCreateUser: false }
+      options: {
+        shouldCreateUser: false,
+        emailRedirectTo: `${window.location.origin}/admin`
+      }
     });
 
     setLoading(false);
 
     if (otpError) {
-      setError("Impossible d'envoyer le code de vérification. Réessayez.");
+      setError("Impossible d'envoyer le lien de vérification. Réessayez.");
       return;
     }
 
-    setStep("otp");
+    setStep("waiting-link");
   }
 
-  async function handleOtpSubmit(e) {
-    e.preventDefault();
-    setError("");
-    setLoading(true);
-
-    const { data, error: verifyError } = await supabase.auth.verifyOtp({
-      email,
-      token: otpCode,
-      type: "email"
-    });
-
-    setLoading(false);
-
-    if (verifyError) {
-      setError("Code incorrect ou expiré.");
-      return;
-    }
-
-    onLoginSuccess(data.session);
-  }
-
-  if (step === "otp") {
+  if (step === "waiting-link") {
     return (
       <div className="admin-login-page">
-        <form className="admin-login-form" onSubmit={handleOtpSubmit}>
-          <h1>Code de vérification</h1>
+        <div className="admin-login-form">
+          <h1>Vérifiez vos emails</h1>
           <p className="admin-login-subtitle">
-            Un code à 6 chiffres a été envoyé à {email}
+            Un lien de connexion a été envoyé à {email}.<br />
+            Cliquez dessus pour accéder à l'espace de gestion.
           </p>
-
-          <label>
-            Code reçu par email
-            <input
-              type="text"
-              inputMode="numeric"
-              value={otpCode}
-              onChange={(e) => setOtpCode(e.target.value)}
-              required
-              autoFocus
-              maxLength={6}
-            />
-          </label>
-
-          {error && <div className="admin-login-error">{error}</div>}
-
-          <button type="submit" disabled={loading}>
-            {loading ? "Vérification..." : "Valider"}
-          </button>
 
           <button
             type="button"
             className="admin-login-secondary-btn"
-            onClick={() => { setStep("password"); setOtpCode(""); setError(""); }}
+            onClick={() => { setStep("password"); setError(""); }}
           >
             ← Retour
           </button>
-        </form>
+        </div>
       </div>
     );
   }
