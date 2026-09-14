@@ -1,16 +1,24 @@
 // /api/generate-invoice.js
 // Génère la facture PDF d'une réservation et la renvoie directement en téléchargement.
-// Accès protégé : nécessite un token de session Supabase valide (vérifié via la clé service_role).
+// Accès protégé : nécessite un token de session Supabase valide.
 
 import { createClient } from "@supabase/supabase-js";
 import { generateInvoicePdf } from "../src/lib/invoicePdf.js";
+
+// Clé anon publique — utilisée uniquement pour vérifier la validité d'un token de session.
+// Ce n'est pas un secret : c'est la même clé que celle utilisée côté site public.
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ2Z2d4bnBta2Zsd21mYnNzb3BlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg5ODQ3OTEsImV4cCI6MjEwNDU2MDc5MX0.v-yLqA71YU_IPHOhDKzX-GghYP75loBprzMpLn-DoC0";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Méthode non autorisée" });
   }
 
-  const supabase = createClient(
+  // Client "anon" dédié à la vérification du token de session envoyé par le navigateur
+  const supabaseAuth = createClient(process.env.SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Client "service_role" pour les opérations privilégiées (lecture de la réservation)
+  const supabaseAdmin = createClient(
     process.env.SUPABASE_URL,
     process.env.SUPABASE_SERVICE_ROLE_KEY
   );
@@ -38,12 +46,13 @@ export default async function handler(req, res) {
   if (!accessToken) {
     return res.status(401).json({ error: "Non authentifié" });
   }
-  const { data: userData, error: userError } = await supabase.auth.getUser(accessToken);
+  const { data: userData, error: userError } = await supabaseAuth.auth.getUser(accessToken);
   if (userError || !userData?.user) {
-    return res.status(401).json({ error: "Session invalide" });
+    console.error("Erreur vérification session:", userError);
+    return res.status(401).json({ error: "Session invalide", detail: userError?.message });
   }
 
-  const { data: reservation, error: fetchError } = await supabase
+  const { data: reservation, error: fetchError } = await supabaseAdmin
     .from("reservations")
     .select("*")
     .eq("id", reservationId)
