@@ -224,7 +224,8 @@ export async function generateInvoicePdf(reservation, options = {}) {
 
   // --- Pied de page ---
   const footerY = 60;
-  line(marginX, footerY + 20, width - marginX, footerY + 20);
+  const footerLineY = footerY + 20;
+  line(marginX, footerLineY, width - marginX, footerLineY);
   text("Mariem Guest Services", marginX, footerY, { font: fontBold, size: 8.5 });
   text(
     `Mariem Kammoun · Wilhelm-Leuschner-Straße 8 · 64347 Griesheim`,
