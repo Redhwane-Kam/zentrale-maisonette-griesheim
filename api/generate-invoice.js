@@ -69,8 +69,8 @@ export async function generateInvoicePdf(reservation, options = {}) {
     page.drawText(str, { x, y: yPos, font, size, color });
   }
 
-  function line(x1, yPos, x2, color = COLORS.borderGray, thickness = 1) {
-    page.drawLine({ start: { x: x1, y: yPos }, end: { x: x2, y: yPos }, thickness, color });
+  function line(x1, y1, x2, y2, color = COLORS.borderGray, thickness = 1) {
+    page.drawLine({ start: { x: x1, y: y1 }, end: { x: x2, y: y2 }, thickness, color });
   }
 
   // --- En-tête : émetteur (gauche) / titre RECHNUNG (droite) ---
@@ -81,7 +81,7 @@ export async function generateInvoicePdf(reservation, options = {}) {
   text("Privatvermietung", width - marginX - 90, y - 15, { size: 9, color: COLORS.textGray });
 
   y -= 30;
-  line(marginX, y, width - marginX, COLORS.textDark, 1.5);
+  line(marginX, y, width - marginX, y, COLORS.textDark, 1.5);
   y -= 30;
 
   // --- Bloc émetteur (gauche) ---
