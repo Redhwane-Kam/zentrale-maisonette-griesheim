@@ -5,6 +5,9 @@ import BookingForm from "../components/BookingForm";
 import AvailabilityCalendar from "../components/AvailabilityCalendar";
 import AmenitiesList from "../components/AmenitiesList";
 import CancellationPolicy from "../components/CancellationPolicy";
+import HeroCarousel from "../components/HeroCarousel";
+import RoomsGallery from "../components/RoomsGallery";
+import { heroCarouselImages } from "../data/roomsGallery";
 import "./Home.css";
 
 export default function Home() {
@@ -24,9 +27,15 @@ export default function Home() {
       </header>
 
       <section className="hero">
+        <HeroCarousel images={heroCarouselImages} />
         <h1>{t.hero.title}</h1>
         <p>{t.hero.subtitle}</p>
         <a href="#booking" className="cta-button">{t.hero.cta}</a>
+      </section>
+
+      <section id="gallery" className="gallery">
+        <h2>{t.nav.gallery}</h2>
+        <RoomsGallery />
       </section>
 
       <section id="amenities" className="amenities">

@@ -21,6 +21,16 @@ const de = {
       safety: "Sicherheit und Sauberkeit",
       parkingExtra: "Zusätzliche Parkmöglichkeiten"
     },
+    rooms: {
+      salon: "Wohnzimmer",
+      suiteParentale: "Elternsuite",
+      chambreEnfants: "Kinderzimmer",
+      cuisine: "Küche",
+      secondeSdb: "Zweites Badezimmer",
+      entree: "Hauseingang",
+      facade: "Gebäudefassade",
+      parking: "Kostenpflichtiger öffentlicher Parkplatz in der Nähe"
+    },
     labels: {
       wifi: "WLAN",
       parking: "Privater und kostenloser Parkplatz auf dem Grundstück",
