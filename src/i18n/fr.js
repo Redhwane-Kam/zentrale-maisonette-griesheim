@@ -112,6 +112,16 @@ const fr = {
     phoneLabel: "Téléphone",
     emailLabel: "Email"
   },
+  impressum: {
+    title: "Mentions légales (Impressum)",
+    responsibleTitle: "Responsable du contenu",
+    contactTitle: "Contact",
+    responsibilityTitle: "Responsabilité du contenu",
+    responsibilityText: "Ce site présente un logement en location de courte durée, géré à titre privé. Malgré un contrôle attentif, aucune responsabilité n'est assumée quant à l'exactitude, l'exhaustivité et l'actualité des informations fournies.",
+    disputeTitle: "Résolution des litiges en ligne",
+    disputeText: "La Commission européenne met à disposition une plateforme de résolution des litiges en ligne, accessible à l'adresse : ec.europa.eu/consumers/odr. Nous ne participons pas à une procédure de résolution des litiges devant une instance de conciliation des consommateurs.",
+    backLink: "Retour à l'accueil"
+  },
   booking: {
     title: "Réserver votre séjour",
     checkin: "Arrivée",

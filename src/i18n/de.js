@@ -112,6 +112,16 @@ const de = {
     phoneLabel: "Telefon",
     emailLabel: "E-Mail"
   },
+  impressum: {
+    title: "Impressum",
+    responsibleTitle: "Verantwortlich für den Inhalt",
+    contactTitle: "Kontakt",
+    responsibilityTitle: "Haftung für Inhalte",
+    responsibilityText: "Diese Website stellt eine privat vermietete Ferienwohnung vor. Trotz sorgfältiger inhaltlicher Kontrolle wird keine Haftung für die Richtigkeit, Vollständigkeit und Aktualität der bereitgestellten Informationen übernommen.",
+    disputeTitle: "Online-Streitbeilegung",
+    disputeText: "Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit, abrufbar unter: ec.europa.eu/consumers/odr. Wir sind nicht bereit oder verpflichtet, an einem Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
+    backLink: "Zurück zur Startseite"
+  },
   booking: {
     title: "Ihren Aufenthalt buchen",
     checkin: "Anreise",

@@ -1,0 +1,58 @@
+.impressum-page {
+  font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+}
+
+.impressum-page .site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  border-bottom: 1px solid #eee;
+}
+
+.impressum-page .logo {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.impressum-content {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.impressum-content h1 {
+  margin-bottom: 32px;
+}
+
+.impressum-content section {
+  margin-bottom: 28px;
+}
+
+.impressum-content h2 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.impressum-content p {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+.impressum-content a {
+  color: #1a1a1a;
+}
+
+.impressum-back {
+  margin-top: 40px;
+}
+
+.impressum-back a {
+  text-decoration: none;
+  font-size: 0.9rem;
+}

@@ -5,9 +5,9 @@ import en from "./en";
 export const translations = { fr, de, en };
 
 export const languages = [
-  { code: "fr", label: "Français" },
   { code: "de", label: "Deutsch" },
-  { code: "en", label: "English" }
+  { code: "en", label: "English" },
+  { code: "fr", label: "Français" }
 ];
 
 export const defaultLanguage = "de";

@@ -112,6 +112,16 @@ const en = {
     phoneLabel: "Phone",
     emailLabel: "Email"
   },
+  impressum: {
+    title: "Legal Notice (Impressum)",
+    responsibleTitle: "Content responsible",
+    contactTitle: "Contact",
+    responsibilityTitle: "Liability for content",
+    responsibilityText: "This site presents a privately managed short-term rental accommodation. Despite careful content review, no liability is assumed for the accuracy, completeness, or timeliness of the information provided.",
+    disputeTitle: "Online dispute resolution",
+    disputeText: "The European Commission provides a platform for online dispute resolution (ODR), available at: ec.europa.eu/consumers/odr. We are not willing or obliged to participate in dispute resolution proceedings before a consumer arbitration board.",
+    backLink: "Back to home"
+  },
   booking: {
     title: "Book your stay",
     checkin: "Check-in",

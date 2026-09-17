@@ -63,6 +63,7 @@ export default function Home() {
 
       <footer className="site-footer">
         <p>{t.footer.contact} · © {new Date().getFullYear()} — {t.footer.rights}</p>
+        <p><a href="/impressum" className="footer-legal-link">{t.impressum.title}</a></p>
       </footer>
     </div>
   );

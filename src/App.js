@@ -2,14 +2,22 @@ import React from "react";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
+import Impressum from "./pages/Impressum";
 
 function App() {
-  // Routage simple sans dépendance externe : /admin affiche le back-office,
-  // toute autre URL affiche le site public.
-  const isAdminRoute = window.location.pathname.startsWith("/admin");
+  // Routage simple sans dépendance externe.
+  const path = window.location.pathname;
 
-  if (isAdminRoute) {
+  if (path.startsWith("/admin")) {
     return <Admin />;
+  }
+
+  if (path.startsWith("/impressum")) {
+    return (
+      <LanguageProvider>
+        <Impressum />
+      </LanguageProvider>
+    );
   }
 
   return (
