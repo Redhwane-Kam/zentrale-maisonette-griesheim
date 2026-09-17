@@ -9,7 +9,8 @@ const de = {
   hero: {
     title: "Eine Wohnung im Herzen von Hessen",
     subtitle: "Ihr komfortables Zuhause auf Zeit",
-    cta: "Verfügbarkeit ansehen"
+    cta: "Verfügbarkeit ansehen",
+    welcomeText: "Willkommen in unserem charmanten 70 m² großen Duplex im Herzen von Griesheim! Die großen Fenster bieten einen schönen Blick auf die Stadt und tauchen die Wohnung in Licht. Genießen Sie nach einem Tag voller Entdeckungen das gemütliche Wohnzimmer und die voll ausgestattete Küche. Ein Arbeitsbereich steht Ihnen ebenfalls zur Verfügung, falls Sie während Ihres Aufenthalts arbeiten möchten.\n\nAlles Wichtige ist in der Nähe: Bäckerei, Supermarkt, Apotheke, Buchhandlung, Optiker und Straßenbahnhaltestelle befinden sich gleich um die Ecke. Restaurants und Parks erreichen Sie ebenfalls zu Fuß.\n\nWenn Sie an einem Freitag zu Besuch sind, nutzen Sie die Gelegenheit, den Wochenmarkt von Griesheim zu entdecken – zu Fuß erreichbar, mit regionalen Produkten!"
   },
   amenities: {
     title: "Ausstattung",
@@ -105,6 +106,11 @@ const de = {
   motivation: {
     label: "Warum dieser Aufenthalt?",
     placeholder: "Z. B.: Geschäftsreise, Familienurlaub, Erkundung der Region..."
+  },
+  contact: {
+    title: "Kontakt",
+    phoneLabel: "Telefon",
+    emailLabel: "E-Mail"
   },
   booking: {
     title: "Ihren Aufenthalt buchen",

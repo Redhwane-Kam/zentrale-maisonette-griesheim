@@ -9,7 +9,8 @@ const fr = {
   hero: {
     title: "Un appartement au cœur de la Hesse",
     subtitle: "Votre pied-à-terre confortable pour un séjour réussi",
-    cta: "Voir les disponibilités"
+    cta: "Voir les disponibilités",
+    welcomeText: "Bienvenue dans notre charmant duplex de 70 m², au cœur de Griesheim ! Ses grandes fenêtres offrent une belle vue sur la ville et baignent l'appartement de lumière. Après une journée de découverte, profitez du salon confortable et de la cuisine entièrement équipée. Un espace bureau est également à votre disposition si vous souhaitez travailler pendant votre séjour.\n\nTout est à portée de main : boulangerie, supermarché, pharmacie, librairie, opticien et arrêt de tramway se trouvent à proximité. Vous pourrez aussi rejoindre à pied des restaurants et des parcs.\n\nSi vous séjournez un vendredi, profitez-en pour découvrir le marché hebdomadaire de Griesheim, accessible à pied, et ses produits régionaux !"
   },
   amenities: {
     title: "Équipements",
@@ -105,6 +106,11 @@ const fr = {
   motivation: {
     label: "Pourquoi ce séjour ?",
     placeholder: "Ex : voyage professionnel, vacances en famille, découverte de la région..."
+  },
+  contact: {
+    title: "Contact",
+    phoneLabel: "Téléphone",
+    emailLabel: "Email"
   },
   booking: {
     title: "Réserver votre séjour",

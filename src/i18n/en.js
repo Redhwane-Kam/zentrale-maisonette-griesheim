@@ -9,7 +9,8 @@ const en = {
   hero: {
     title: "An apartment in the heart of Hesse",
     subtitle: "Your comfortable home away from home",
-    cta: "Check availability"
+    cta: "Check availability",
+    welcomeText: "Welcome to our charming 70 m² duplex in the heart of Griesheim! Large windows offer a beautiful view of the city and fill the apartment with light. After a day of exploring, enjoy the cozy living room and the fully equipped kitchen. A workspace is also available if you'd like to work during your stay.\n\nEverything you need is close by: bakery, supermarket, pharmacy, bookshop, optician and tram stop are all nearby. Restaurants and parks are also within walking distance.\n\nIf you're staying on a Friday, don't miss Griesheim's weekly market, reachable on foot, with its regional produce!"
   },
   amenities: {
     title: "Amenities",
@@ -105,6 +106,11 @@ const en = {
   motivation: {
     label: "Why this stay?",
     placeholder: "E.g.: business trip, family vacation, exploring the region..."
+  },
+  contact: {
+    title: "Contact",
+    phoneLabel: "Phone",
+    emailLabel: "Email"
   },
   booking: {
     title: "Book your stay",

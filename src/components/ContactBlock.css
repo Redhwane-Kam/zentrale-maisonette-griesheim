@@ -1,0 +1,28 @@
+.contact-block {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 32px 24px;
+  background: #f7f5f2;
+  border-radius: 12px;
+}
+
+.contact-block h3 {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.contact-block p {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 6px;
+}
+
+.contact-block a {
+  color: #1a1a1a;
+  text-decoration: none;
+}
+
+.contact-block a:hover {
+  text-decoration: underline;
+}

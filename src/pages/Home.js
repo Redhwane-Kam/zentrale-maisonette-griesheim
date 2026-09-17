@@ -7,6 +7,7 @@ import AmenitiesList from "../components/AmenitiesList";
 import CancellationPolicy from "../components/CancellationPolicy";
 import HeroCarousel from "../components/HeroCarousel";
 import RoomsGallery from "../components/RoomsGallery";
+import ContactBlock from "../components/ContactBlock";
 import { heroCarouselImages } from "../data/roomsGallery";
 import "./Home.css";
 
@@ -31,6 +32,12 @@ export default function Home() {
         <h1>{t.hero.title}</h1>
         <p>{t.hero.subtitle}</p>
         <a href="#booking" className="cta-button">{t.hero.cta}</a>
+
+        <div className="hero-welcome">
+          {t.hero.welcomeText.split("\n\n").map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+        </div>
       </section>
 
       <section id="gallery" className="gallery">
@@ -47,6 +54,11 @@ export default function Home() {
         <AvailabilityCalendar />
         <BookingForm />
         <CancellationPolicy />
+      </section>
+
+      <section id="contact" className="contact-section">
+        <h2>{t.contact.title}</h2>
+        <ContactBlock />
       </section>
 
       <footer className="site-footer">
