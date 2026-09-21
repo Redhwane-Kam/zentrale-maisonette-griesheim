@@ -6,6 +6,7 @@
 
 .client-history-toggle {
   background: none;
+  color: #444;
   border: 1px solid #ddd;
   border-radius: 6px;
   padding: 6px 12px;
@@ -166,6 +167,7 @@
 
 .client-history-form-actions button[type="button"] {
   background: none;
+  color: #444;
   border: 1px solid #ccc;
   padding: 7px 16px;
   border-radius: 6px;

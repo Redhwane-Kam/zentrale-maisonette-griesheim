@@ -16,6 +16,7 @@
 
 .calendar-header button {
   background: none;
+  color: #1a1a1a;
   border: 1px solid #ddd;
   border-radius: 6px;
   width: 32px;

@@ -53,7 +53,11 @@ function formatEuro(n) {
  */
 export async function generateInvoicePdf(reservation, options = {}) {
   const numeroFacture = options.numeroFacture || "RE-XXXX-0000";
-  const dateFacture = options.dateFacture || new Date().toISOString().split("T")[0];
+  // Par défaut, la date de facture reprend la date de création de la
+  // réservation (plutôt que la date du jour de génération du PDF),
+  // pour rester cohérente avec le moment réel de la transaction.
+  const dateFacture = options.dateFacture
+    || (reservation.created_at ? reservation.created_at.split("T")[0] : new Date().toISOString().split("T")[0]);
 
   const pdfDoc = await PDFDocument.create();
   const page = pdfDoc.addPage([595.28, 841.89]); // A4
