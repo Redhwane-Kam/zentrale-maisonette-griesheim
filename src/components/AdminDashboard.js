@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { supabase } from "../lib/supabaseClient";
 import ClientHistory from "./ClientHistory";
+import RoomEditor from "./RoomEditor";
 import "./AdminDashboard.css";
 
 const STATUS_LABELS = {
@@ -14,6 +15,7 @@ export default function AdminDashboard({ session, onLogout }) {
   const [reservations, setReservations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("toutes");
+  const [activeTab, setActiveTab] = useState("reservations");
 
   const fetchReservations = useCallback(async () => {
     setLoading(true);
@@ -112,6 +114,25 @@ export default function AdminDashboard({ session, onLogout }) {
         <button className="admin-logout-btn" onClick={onLogout}>Déconnexion</button>
       </header>
 
+      <div className="admin-main-tabs">
+        <button
+          className={`admin-main-tab ${activeTab === "reservations" ? "active" : ""}`}
+          onClick={() => setActiveTab("reservations")}
+        >
+          Réservations
+        </button>
+        <button
+          className={`admin-main-tab ${activeTab === "photos" ? "active" : ""}`}
+          onClick={() => setActiveTab("photos")}
+        >
+          Photos & Équipements
+        </button>
+      </div>
+
+      {activeTab === "photos" && <RoomEditor />}
+
+      {activeTab === "reservations" && (
+        <>
       <div className="admin-filters">
         {["toutes", "en_attente", "confirmee", "annulee", "bloquee"].map((f) => (
           <button
@@ -193,6 +214,8 @@ export default function AdminDashboard({ session, onLogout }) {
           </div>
         ))}
       </div>
+        </>
+      )}
     </div>
   );
 }
