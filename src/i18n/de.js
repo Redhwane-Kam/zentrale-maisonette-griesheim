@@ -137,7 +137,13 @@ const de = {
     nameLabel: "Vollständiger Name",
     emailLabel: "E-Mail",
     phoneLabel: "Telefon",
-    guestsLabel: "Anzahl der Gäste"
+    guestsLabel: "Anzahl der Gäste",
+    idTypeLabel: "Art des Ausweisdokuments",
+    idTypeCard: "Personalausweis",
+    idTypePassport: "Reisepass",
+    idNumberLabel: "Ausweisnummer",
+    consentLabel: "Ich bin damit einverstanden, dass meine persönlichen Daten (Name, E-Mail, Telefon, Art und Nummer des Ausweisdokuments) von Mariem Kammoun ausschließlich zur Bearbeitung meiner Buchungsanfrage und zur Identitätsprüfung bei Anreise verwendet werden. Diese Daten werden nicht verkauft oder an Dritte weitergegeben.",
+    consentRequired: "Sie müssen zustimmen, um Ihre Anfrage zu senden."
   },
   footer: {
     contact: "Kontakt",
