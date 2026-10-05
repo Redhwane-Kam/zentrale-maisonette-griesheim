@@ -20,6 +20,9 @@ export default function BookingForm() {
   const [guests, setGuests] = useState(1);
   const [motivation, setMotivation] = useState("");
   const [tarifNonRemboursable, setTarifNonRemboursable] = useState(false);
+  const [idType, setIdType] = useState("carte");
+  const [idNumber, setIdNumber] = useState("");
+  const [consent, setConsent] = useState(false);
 
   const [state, setState] = useState("idle"); // idle | loading | unavailable | success | error
 
@@ -51,7 +54,7 @@ export default function BookingForm() {
       }
 
       // Crée la réservation en statut "en_attente"
-      const { data: newReservation, error: insertError } = await supabase
+      const { error: insertError } = await supabase
         .from("reservations")
         .insert({
           date_arrivee: checkin,
@@ -64,33 +67,17 @@ export default function BookingForm() {
           source: "site",
           prix_total: montantTotal,
           message_voyageur: motivation,
-          tarif_non_remboursable: tarifNonRemboursable && !longSejour
+          tarif_non_remboursable: tarifNonRemboursable && !longSejour,
+          type_piece_identite: idType,
+          numero_piece_identite: idNumber,
+          consentement_rgpd: consent
         })
         .select()
         .single();
 
       if (insertError) throw insertError;
 
-      // Redirige vers le paiement Stripe
-      const checkoutResponse = await fetch("/api/create-checkout-session", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          reservationId: newReservation.id,
-          montantEuros: montantTotal,
-          emailVoyageur: email,
-          nomLogement: "Zentrale Maisonette Griesheim"
-        })
-      });
-
-      const checkoutData = await checkoutResponse.json();
-
-      if (checkoutData.url) {
-        window.location.href = checkoutData.url;
-        return;
-      }
-
-      throw new Error("Impossible de créer le paiement");
+      setState("success");
     } catch (err) {
       console.error(err);
       setState("error");
@@ -165,6 +152,24 @@ export default function BookingForm() {
       </label>
 
       <label>
+        {t.booking.idTypeLabel}
+        <select value={idType} onChange={(e) => setIdType(e.target.value)} required>
+          <option value="carte">{t.booking.idTypeCard}</option>
+          <option value="passeport">{t.booking.idTypePassport}</option>
+        </select>
+      </label>
+
+      <label>
+        {t.booking.idNumberLabel}
+        <input
+          type="text"
+          value={idNumber}
+          onChange={(e) => setIdNumber(e.target.value)}
+          required
+        />
+      </label>
+
+      <label>
         {t.motivation.label}
         <textarea
           value={motivation}
@@ -195,6 +200,16 @@ export default function BookingForm() {
           <strong>{montantTotal}€</strong>
         </div>
       )}
+
+      <label className="booking-checkbox">
+        <input
+          type="checkbox"
+          checked={consent}
+          onChange={(e) => setConsent(e.target.checked)}
+          required
+        />
+        {t.booking.consentLabel}
+      </label>
 
       {state === "unavailable" && (
         <div className="booking-message booking-error">{t.booking.unavailable}</div>
