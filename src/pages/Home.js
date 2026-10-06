@@ -8,11 +8,13 @@ import CancellationPolicy from "../components/CancellationPolicy";
 import HeroCarousel from "../components/HeroCarousel";
 import RoomsGallery from "../components/RoomsGallery";
 import ContactBlock from "../components/ContactBlock";
-import { heroCarouselImages } from "../data/roomsGallery";
+import { useRoomContent } from "../data/useRoomContent";
 import "./Home.css";
 
 export default function Home() {
   const { t } = useLanguage();
+  const { rooms } = useRoomContent();
+  const heroImages = rooms.flatMap((room) => room.photos);
 
   return (
     <div className="page">
@@ -28,7 +30,7 @@ export default function Home() {
       </header>
 
       <section className="hero">
-        <HeroCarousel images={heroCarouselImages} />
+        <HeroCarousel images={heroImages} />
         <h1>{t.hero.title}</h1>
         <p>{t.hero.subtitle}</p>
         <a href="#booking" className="cta-button">{t.hero.cta}</a>
