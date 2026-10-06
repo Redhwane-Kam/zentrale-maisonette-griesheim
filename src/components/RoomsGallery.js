@@ -1,38 +1,47 @@
 import React from "react";
 import { useLanguage } from "../i18n/LanguageContext";
-import { rooms } from "../data/roomsGallery";
+import { useRoomContent } from "../data/useRoomContent";
 import "./RoomsGallery.css";
 
 export default function RoomsGallery() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
+  const { rooms, loading } = useRoomContent();
+
+  if (loading) return null;
 
   return (
     <div className="rooms-gallery">
-      {rooms.map((room) => (
-        <section key={room.key} className="room-block">
-          <h3 className="room-title">{t.amenities.rooms[room.key]}</h3>
+      {rooms.map((room) => {
+        const comment = room[`comment_${lang}`];
 
-          <div className="room-images">
-            {room.images.map((src, i) => (
-              <img
-                key={i}
-                src={src}
-                alt={t.amenities.rooms[room.key]}
-                className="room-image"
-                loading="lazy"
-              />
-            ))}
-          </div>
+        return (
+          <section key={room.room_key} className="room-block">
+            <h3 className="room-title">{t.amenities.rooms[room.room_key]}</h3>
 
-          {room.amenityKeys.length > 0 && (
-            <ul className="room-amenities">
-              {room.amenityKeys.map((key) => (
-                <li key={key}>{t.amenities.labels[key]}</li>
+            <div className="room-images">
+              {room.photos.map((src, i) => (
+                <img
+                  key={src + i}
+                  src={src}
+                  alt={t.amenities.rooms[room.room_key]}
+                  className="room-image"
+                  loading="lazy"
+                />
               ))}
-            </ul>
-          )}
-        </section>
-      ))}
+            </div>
+
+            {room.amenity_keys.length > 0 && (
+              <ul className="room-amenities">
+                {room.amenity_keys.map((key) => (
+                  <li key={key}>{t.amenities.labels[key]}</li>
+                ))}
+              </ul>
+            )}
+
+            {comment && <p className="room-comment">{comment}</p>}
+          </section>
+        );
+      })}
     </div>
   );
 }

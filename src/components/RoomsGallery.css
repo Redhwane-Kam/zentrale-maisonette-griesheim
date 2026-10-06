@@ -55,3 +55,10 @@
   content: "✓ ";
   color: #34a853;
 }
+
+.room-comment {
+  margin-top: 14px;
+  font-size: 0.92rem;
+  color: #555;
+  line-height: 1.5;
+}
