@@ -14,7 +14,7 @@ export default function AdminLogin({ onLoginSuccess }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [totpCode, setTotpCode] = useState("");
-  const [factorId, setFactorId] = useState(null);
+  const [verifiedFactorIds, setVerifiedFactorIds] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -43,10 +43,10 @@ export default function AdminLogin({ onLoginSuccess }) {
       return;
     }
 
-    const verifiedTotp = factorsData?.totp?.find((f) => f.status === "verified");
+    const verifiedFactors = (factorsData?.totp || []).filter((f) => f.status === "verified");
 
-    if (verifiedTotp) {
-      setFactorId(verifiedTotp.id);
+    if (verifiedFactors.length > 0) {
+      setVerifiedFactorIds(verifiedFactors.map((f) => f.id));
       setStep("totp-verify");
     } else {
       // Première connexion : pas encore de TOTP configuré
@@ -59,29 +59,42 @@ export default function AdminLogin({ onLoginSuccess }) {
     setError("");
     setLoading(true);
 
-    const { data: challengeData, error: challengeError } = await supabase.auth.mfa.challenge({
-      factorId
-    });
-    if (challengeError) {
-      setLoading(false);
-      setError("Erreur : " + challengeError.message);
-      return;
-    }
+    // Plusieurs personnes peuvent avoir leur propre facteur TOTP sur ce
+    // compte (ex. période de test à deux) : on essaie chaque facteur
+    // jusqu'à ce que l'un accepte le code saisi.
+    let lastError = null;
 
-    const { data: verifyData, error: verifyError } = await supabase.auth.mfa.verify({
-      factorId,
-      challengeId: challengeData.id,
-      code: totpCode
-    });
+    for (const candidateId of verifiedFactorIds) {
+      const { data: challengeData, error: challengeError } = await supabase.auth.mfa.challenge({
+        factorId: candidateId
+      });
+
+      if (challengeError) {
+        lastError = challengeError;
+        continue;
+      }
+
+      const { data: verifyData, error: verifyError } = await supabase.auth.mfa.verify({
+        factorId: candidateId,
+        challengeId: challengeData.id,
+        code: totpCode
+      });
+
+      if (!verifyError) {
+        setLoading(false);
+        onLoginSuccess(verifyData);
+        return;
+      }
+
+      lastError = verifyError;
+    }
 
     setLoading(false);
-
-    if (verifyError) {
-      setError("Code incorrect. Vérifiez l'heure de votre téléphone.");
-      return;
-    }
-
-    onLoginSuccess(verifyData);
+    setError(
+      lastError
+        ? "Code incorrect. Vérifiez l'heure de votre téléphone."
+        : "Aucun facteur de vérification disponible."
+    );
   }
 
   async function handleEmailFallback() {

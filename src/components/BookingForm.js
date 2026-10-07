@@ -77,6 +77,26 @@ export default function BookingForm() {
 
       if (insertError) throw insertError;
 
+      // Notifie Mariem par email qu'une nouvelle demande attend sa décision.
+      // Une erreur ici ne doit jamais empêcher la réservation d'aboutir :
+      // elle est donc isolée et simplement journalisée en cas d'échec.
+      try {
+        await fetch("/api/notify-owner", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nom: name,
+            email,
+            telephone: phone,
+            date_arrivee: checkin,
+            date_depart: checkout,
+            nombre_voyageurs: guests
+          })
+        });
+      } catch (notifyErr) {
+        console.error("Erreur notification propriétaire:", notifyErr);
+      }
+
       setState("success");
     } catch (err) {
       console.error(err);
