@@ -6,7 +6,7 @@
 // Variable d'environnement nécessaire sur Vercel : RESEND_API_KEY
 // (déjà présente — ce fichier ne fait que la réutiliser).
 
-const OWNER_EMAIL = "redhwanekamoun@gmail.com";
+const OWNER_EMAIL = "mariem.kammoun@gmx.de";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
