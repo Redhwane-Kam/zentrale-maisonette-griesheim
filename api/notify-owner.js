@@ -6,7 +6,11 @@
 // Variable d'environnement nécessaire sur Vercel : RESEND_API_KEY
 // (déjà présente — ce fichier ne fait que la réutiliser).
 
-const OWNER_EMAIL = "mariem.kammoun@gmx.de";
+// Temporaire : Resend (plan gratuit, sans domaine vérifié) n'autorise
+// l'envoi qu'à l'adresse du propriétaire du compte. À remplacer par
+// l'adresse définitive de Mariem une fois le domaine du site vérifié
+// sur Resend.
+const OWNER_EMAIL = "redhwanekamoun@gmail.com";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
