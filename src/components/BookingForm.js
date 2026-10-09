@@ -71,9 +71,7 @@ export default function BookingForm() {
           type_piece_identite: idType,
           numero_piece_identite: idNumber,
           consentement_rgpd: consent
-        })
-        .select()
-        .single();
+        });
 
       if (insertError) throw insertError;
 
