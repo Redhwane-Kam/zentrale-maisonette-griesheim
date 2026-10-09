@@ -166,6 +166,11 @@ export default function AdminDashboard({ session, onLogout }) {
             <div className="admin-reservation-body">
               <p><strong>{r.nom_voyageur || "—"}</strong> · {r.nombre_voyageurs} voyageur(s)</p>
               <p className="admin-contact">{r.email_voyageur} {r.telephone_voyageur && `· ${r.telephone_voyageur}`}</p>
+              {r.numero_piece_identite && (
+                <p className="admin-identity">
+                  {r.type_piece_identite === "passeport" ? "Passeport" : "Carte d'identité"} n° {r.numero_piece_identite}
+                </p>
+              )}
               <p className="admin-price">
                 {r.prix_total ? `${r.prix_total}€` : "—"}
                 {r.tarif_non_remboursable && " (non remboursable)"}

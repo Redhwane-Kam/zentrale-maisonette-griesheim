@@ -90,7 +90,9 @@ export default function BookingForm() {
             telephone: phone,
             date_arrivee: checkin,
             date_depart: checkout,
-            nombre_voyageurs: guests
+            nombre_voyageurs: guests,
+            type_piece_identite: idType,
+            numero_piece_identite: idNumber
           })
         });
       } catch (notifyErr) {
