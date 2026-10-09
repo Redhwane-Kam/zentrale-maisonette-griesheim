@@ -6,7 +6,7 @@
 // Variable d'environnement nécessaire sur Vercel : RESEND_API_KEY
 // (déjà présente — ce fichier ne fait que la réutiliser).
 
-const OWNER_EMAIL = "redhwanekamoun@gmail.com";
+const OWNER_EMAIL = "mariem.kammoun@gmx.de";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -42,6 +42,7 @@ export default async function handler(req, res) {
               <tr><td><strong>Arrivée</strong></td><td>${reservation.date_arrivee || "—"}</td></tr>
               <tr><td><strong>Départ</strong></td><td>${reservation.date_depart || "—"}</td></tr>
               <tr><td><strong>Voyageurs</strong></td><td>${reservation.nombre_voyageurs || "—"}</td></tr>
+              <tr><td><strong>Pièce d'identité</strong></td><td>${reservation.type_piece_identite === "passeport" ? "Passeport" : "Carte d'identité"} n° ${reservation.numero_piece_identite || "—"}</td></tr>
             </table>
             <p><a href="https://zentrale-maisonette-griesheim.vercel.app/mawka3">Voir la demande dans le back-office</a></p>
           </div>
