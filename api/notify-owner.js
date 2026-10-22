@@ -10,7 +10,7 @@
 // l'envoi qu'à l'adresse du propriétaire du compte. À remplacer par
 // l'adresse définitive de Mariem une fois le domaine du site vérifié
 // sur Resend.
-const OWNER_EMAIL = "redhwanekamoun@gmail.com";
+const OWNER_EMAIL = "mariemguestservices@gmail.com";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
