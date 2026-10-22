@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: process.env.RESEND_FROM_EMAIL || "reservations@zentrale-maisonette-griesheim.de",
+        from: process.env.RESEND_FROM_EMAIL || "ex.reservations@zentrale-maisonette-griesheim.de",
         to: [OWNER_EMAIL],
         subject: "Nouvelle demande de réservation — Zentrale Maisonette Griesheim",
         html: `
