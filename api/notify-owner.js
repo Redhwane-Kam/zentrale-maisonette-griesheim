@@ -6,11 +6,14 @@
 // Variable d'environnement nécessaire sur Vercel : RESEND_API_KEY
 // (déjà présente — ce fichier ne fait que la réutiliser).
 
-// Temporaire : Resend (plan gratuit, sans domaine vérifié) n'autorise
-// l'envoi qu'à l'adresse du propriétaire du compte. À remplacer par
-// l'adresse définitive de Mariem une fois le domaine du site vérifié
-// sur Resend.
+// Destinataire des notifications : l'adresse de Mariem.
 const OWNER_EMAIL = "mariemguestservices@gmail.com";
+
+// Expéditeur : une adresse sur le domaine vérifié sur Resend
+// (zentrale-maisonette-griesheim.de). Écrite directement ici, sans passer
+// par une variable d'environnement, pour éviter qu'une ancienne valeur
+// (onboarding@resend.dev) sur Vercel ne reprenne le dessus.
+const FROM_EMAIL = "Zentrale Maisonette <reservations@zentrale-maisonette-griesheim.de>";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -32,7 +35,7 @@ export default async function handler(req, res) {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        from: process.env.RESEND_FROM_EMAIL || "ex.reservations@zentrale-maisonette-griesheim.de",
+        from: FROM_EMAIL,
         to: [OWNER_EMAIL],
         subject: "Nouvelle demande de réservation — Zentrale Maisonette Griesheim",
         html: `
