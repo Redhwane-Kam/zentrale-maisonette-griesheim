@@ -51,7 +51,7 @@ export default async function handler(req, res) {
               <tr><td><strong>Voyageurs</strong></td><td>${reservation.nombre_voyageurs || "—"}</td></tr>
               <tr><td><strong>Pièce d'identité</strong></td><td>${reservation.type_piece_identite === "passeport" ? "Passeport" : "Carte d'identité"} n° ${reservation.numero_piece_identite || "—"}</td></tr>
             </table>
-            <p><a href="https://zentrale-maisonette-griesheim.vercel.app/mawka3">Voir la demande dans le back-office</a></p>
+            <p><a href="https://zentrale-maisonette-griesheim.de/mawka3">Voir la demande dans le back-office</a></p>
           </div>
         `
       })
@@ -71,3 +71,4 @@ export default async function handler(req, res) {
     return res.status(200).json({ sent: false });
   }
 }
+
